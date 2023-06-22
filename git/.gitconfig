@@ -1,0 +1,16 @@
+# https://dev.to/equiman/how-to-use-multiple-users-with-git-2e9l
+
+[user]
+	name = Rodolfo Martínez Vega
+	email = rodomar@outlook.com
+[core]
+	editor = nvim
+[pull]
+	rebase = true
+[alias]
+  lg = log --color --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit
+
+[init]
+	defaultBranch = main
+[http]
+	cookiefile = /home/ramrodo/.gitcookies

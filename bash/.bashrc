@@ -151,8 +151,8 @@ alias ll="ls -la"
 alias ..="cd .."
 alias ifconfig="ip address"
 alias dig="drill"
-alias guf="git pull upstream master && git push origin master"
-alias gufm="git fetch upstream && git rebase upstream/main && git push origin main --force"
+alias guf="git fetch upstream && git rebase upstream/master && git push && git push --tags"
+alias gufm="git fetch upstream && git rebase upstream/main && git push origin main --force && git push --tags"
 alias freex="free -h | head -2 && sync && sudo sysctl -w vm.drop_caches=3 && free -h | head -2"
 
 ########################## Kubernetes #############################################
@@ -160,8 +160,25 @@ source <(kubectl completion bash)
 alias k=kubectl
 complete -F __start_kubectl k
 
+# krew (K8s plugin manager)
+export PATH="$PATH:$HOME/.krew/bin"
+
+# Release Notes - Shadow - krel
+export KUBE_EDITOR="code -w"
+
+########################## Rackspace - KAAS #######################################
+export AWS_CREDS_DIR=/home/ramrodo/.aws/
+export KAASCTL_CONFIG_DIR=/home/ramrodo/git/ramrodo-forks/kaas/secrets/unencrypted/.kaas
+export KAASCTL_PROVIDER_NAME=dev1
+
+# Add RVM to PATH for scripting. Make sure this is the last PATH variable change.
+export PATH="$PATH:$HOME/.rvm/bin"
+export RS_USERNAME=rms-sre-rodolfo-martinez 
+export RS_API_KEY=d71f7e0e5234481aa4cc8d3ad04dc112
+
 ########################## Go ###################################################
-export PATH=$PATH:/home/ramrodo/go/bin
+export PATH=$PATH:$HOME/go/bin
+export GOPATH=$(go env GOPATH)
 
 ########################## Ruby #################################################
 [[ -s "$HOME/.rvm/scripts/rvm" ]] && source "$HOME/.rvm/scripts/rvm" # Load RVM into a shell session *as a function*
@@ -178,6 +195,21 @@ export PATH=$PATH:/home/ramrodo/go/bin
 # docker rmi -f `docker images -qa `
 
 # Remove all volumes
-# docker volume rm $(docker volume ls -qf)
+# docker volume rm $(docker volume ls -q)
+
+################## Common used/util commands #######################
+# Extract a page of a PDF
+# pdftk 9_Estado-de-cuenta.pdf cat 1 output 9_Estado-de-cuenta-caratula.pdf
+# Merge two PDFs with specific pages into one
+# pdftk A=Llenado.pdf B=Scan.pdf cat A1-4 B1-2 output SGMM-cambio-poliza.pdf
+# Merge many PDFs into one
+# pdftk file1.pdf file2.pdf file3.pdf cat output newfile.pdf
+# Decrypt/Remove password from PDFs
+# qpdf --password=<pwd-here> --decrypt 2022-12.pdf 2022-12-d.pdf
+
+### 1Password CLI
+source /home/ramrodo/.config/op/plugins.sh
 
 
+# add Pulumi to the PATH
+export PATH=$PATH:$HOME/.pulumi/bin
